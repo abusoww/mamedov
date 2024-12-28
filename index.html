@@ -1,28 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimalist Page</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: white;
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            color: black;
-            font-size: 2rem;
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Обратный отсчет</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f3f4f6;
+    }
+    .countdown {
+      text-align: center;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .timer {
+      font-size: 2rem;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-    <h1>coming брат coming, не рожай </h1>
+  <div class="countdown">
+    <h1>До 30 декабря осталось:</h1>
+    <div class="timer" id="timer">Загрузка...</div>
+  </div>
+
+  <script>
+    function updateCountdown() {
+      const targetDate = new Date("December 30, 2024 00:00:00").getTime();
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById("timer").textContent = `${days} дней ${hours} часов ${minutes} минут ${seconds} секунд`;
+      
+      if (difference <= 0) {
+        clearInterval(countdownInterval);
+        document.getElementById("timer").textContent = "С Новым годом!";
+      }
+    }
+
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown(); // Первоначальное обновление
+  </script>
 </body>
 </html>
