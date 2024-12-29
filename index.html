@@ -1,59 +1,338 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Обратный отсчет</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f3f4f6;
-    }
-    .countdown {
-      text-align: center;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    .timer {
-      font-size: 2rem;
-      color: #333;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный Сайт</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="preloader.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <div class="countdown">
-    <h1>Осталось:</h1>
-    <div class="timer" id="timer">Загрузка...</div>
-  </div>
+    <div class="preloader">
+        <div class="preloader-spinner"></div>
+    </div>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <div class="menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">ГЛАВНАЯ</a></li>
+                <li><a href="#about">ОБО МНЕ</a></li>
+                <li><a href="#gallery">ГАЛЕРЕЯ</a></li>
+                <li><a href="#contact">КОНТАКТЫ</a></li>
+            </ul>
+        </div>
+    </nav>
 
-  <script>
-    function updateCountdown() {
-      const targetDate = new Date("December 30, 2024 00:00:00").getTime();
-      const now = new Date().getTime();
-      const difference = targetDate - now;
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <img src="https://via.placeholder.com/150" alt="Profile Image" class="profile-image">
+            <h1>Нурлан Мамедов</h1>
+            <p>ДОБРО ПОЖАЛОВАТЬ В МОЙ МИР</p>
+            <div class="quote">
+                "Жизнь - это не поиск себя. Жизнь - это создание себя."
+                <span class="quote-author">- Бернард Шоу</span>
+            </div>
+        </div>
+    </section>
 
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-      document.getElementById("timer").textContent = `${days} дней ${hours} часов ${minutes} минут ${seconds} секунд`;
-      
-      if (difference <= 0) {
-        clearInterval(countdownInterval);
-        document.getElementById("timer").textContent = "С Новым годом!";
-      }
-    }
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2>ОБО МНЕ</h2>
+            <p class="quote-large">"Каждый человек - это целая вселенная историй, опыта и мудрости"</p>
+            <p class="about-text">
+                Я увлеченный человек, который верит в постоянное развитие и личностный рост. 
+                Мой путь сформирован разнообразным опытом и интересными встречами. 
+                Я люблю [ваши увлечения] и всегда рад новым знакомствам с интересными людьми.
+            </p>
+        </div>
+    </section>
 
-    const countdownInterval = setInterval(updateCountdown, 1000);
-    updateCountdown(); // Первоначальное обновление
-  </script>
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <h2>ГАЛЕРЕЯ</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://i.ibb.co/dc23sLv/IMG-5079.jpg" alt="Gallery Image 1">
+                <div class="overlay">
+                    <!-- Removed text -->
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.ibb.co/dc23sLv/IMG-5079.jpg" alt="Gallery Image 1">
+                <div class="overlay">
+                    <!-- Removed text -->
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.ibb.co/dc23sLv/IMG-5079.jpg" alt="Gallery Image 1">
+                <div class="overlay">
+                    <!-- Removed text -->
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.ibb.co/dc23sLv/IMG-5079.jpg" alt="Gallery Image 1">
+                <div class="overlay">
+                    <!-- Removed text -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>СВЯЗАТЬСЯ СО МНОЙ</h2>
+        <p class="contact-intro">Я всегда рад новым знакомствам и интересным проектам. Не стесняйтесь связаться со мной!</p>
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fab fa-telegram"></i>
+                    <a href="https://t.me/your_username" target="_blank">Telegram</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://instagram.com/your_username" target="_blank">Instagram</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Владивосток, Россия</span>
+                </div>
+            </div>
+            <form class="contact-form">
+                <input type="text" name="name" placeholder="Ваше имя" required>
+                <input type="email" name="email" placeholder="Ваш email" required>
+                <textarea name="message" placeholder="Ваше сообщение" required></textarea>
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">© 2024 Нурлан Мамедов. Все права защищены.</p>
+            <p class="watermark">Site made by <a href="https://abushov.com" target="_blank">Nijat Abushov</a></p>
+        </div>
+    </footer>
+
+    <!-- Popup Overlay -->
+    <div class="popup-overlay">
+        <div class="popup-content">
+            <button class="popup-close"><i class="fas fa-times"></i></button>
+            <img src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const preloader = document.querySelector('.preloader');
+            preloader.classList.add('fade-out');
+        });
+
+        // Mobile menu functionality
+        const menuBtn = document.querySelector('.menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('open');
+            navMenu.classList.toggle('open');
+        });
+
+        // Close menu when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuBtn.classList.remove('open');
+                navMenu.classList.remove('open');
+            });
+        });
+
+        // Active menu handler
+        const sections = document.querySelectorAll('section');
+        
+        function setActiveMenu() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - sectionHeight/3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', setActiveMenu);
+        window.addEventListener('load', setActiveMenu);
+
+        // Slider functionality
+        const slider = {
+            slides: document.querySelectorAll('.slide'),
+            dots: document.querySelectorAll('.dot'),
+            prevBtn: document.querySelector('.prev-btn'),
+            nextBtn: document.querySelector('.next-btn'),
+            sliderContainer: document.querySelector('.interests-slider'),
+            currentSlide: 0,
+            touchStartX: 0,
+            touchEndX: 0,
+            mouseStartX: 0,
+            mouseEndX: 0,
+            isDragging: false,
+
+            init() {
+                this.prevBtn.addEventListener('click', () => this.changeSlide('prev'));
+                this.nextBtn.addEventListener('click', () => this.changeSlide('next'));
+                
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                });
+
+                // Touch Events (Mobile)
+                this.sliderContainer.addEventListener('touchstart', (e) => {
+                    this.touchStartX = e.touches[0].clientX;
+                }, { passive: true });
+
+                this.sliderContainer.addEventListener('touchmove', (e) => {
+                    this.touchEndX = e.touches[0].clientX;
+                    e.preventDefault(); // Prevent scrolling while swiping
+                }, { passive: false });
+
+                this.sliderContainer.addEventListener('touchend', () => {
+                    this.handleSwipe(this.touchStartX, this.touchEndX);
+                });
+
+                // Mouse Events (Desktop)
+                this.sliderContainer.addEventListener('mousedown', (e) => {
+                    this.isDragging = true;
+                    this.mouseStartX = e.clientX;
+                    this.sliderContainer.style.cursor = 'grabbing';
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (this.isDragging) {
+                        this.mouseEndX = e.clientX;
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    if (this.isDragging) {
+                        this.handleSwipe(this.mouseStartX, this.mouseEndX);
+                        this.isDragging = false;
+                        this.sliderContainer.style.cursor = 'grab';
+                    }
+                });
+            },
+
+            handleSwipe(startX, endX) {
+                const swipeDistance = startX - endX;
+                const minSwipeDistance = 30; // Reduced threshold for more responsive swipes
+
+                if (Math.abs(swipeDistance) > minSwipeDistance) {
+                    if (swipeDistance > 0) {
+                        this.changeSlide('next');
+                    } else {
+                        this.changeSlide('prev');
+                    }
+                }
+            },
+
+            changeSlide(direction) {
+                this.slides[this.currentSlide].classList.remove('active');
+                this.dots[this.currentSlide].classList.remove('active');
+
+                if (direction === 'next') {
+                    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+                } else {
+                    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+                }
+
+                this.slides[this.currentSlide].classList.add('active');
+                this.dots[this.currentSlide].classList.add('active');
+            },
+
+            goToSlide(index) {
+                this.slides[this.currentSlide].classList.remove('active');
+                this.dots[this.currentSlide].classList.remove('active');
+                
+                this.currentSlide = index;
+                
+                this.slides[this.currentSlide].classList.add('active');
+                this.dots[this.currentSlide].classList.add('active');
+            }
+        };
+
+        slider.init();
+
+        // Popup functionality
+        const popup = document.querySelector('.popup-overlay');
+        const popupContent = popup.querySelector('.popup-content');
+        const popupClose = popup.querySelector('.popup-close');
+        const popupImg = popup.querySelector('img');
+        const popupTitle = popup.querySelector('h3');
+        const popupDesc = popup.querySelector('p');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        function openPopup(item) {
+            const img = item.querySelector('img');
+            const title = item.querySelector('.overlay span').textContent;
+            const desc = item.querySelector('.overlay p').textContent;
+
+            popupImg.src = img.src;
+            popupImg.alt = img.alt;
+            popupTitle.textContent = title;
+            popupDesc.textContent = desc;
+
+            popup.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closePopup() {
+            popup.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Add click events to gallery items
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => openPopup(item));
+        });
+
+        // Close popup when clicking close button or outside
+        popupClose.addEventListener('click', closePopup);
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) closePopup();
+        });
+
+        // Close popup with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closePopup();
+        });
+
+        // Prevent popup content clicks from closing the popup
+        popupContent.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    </script>
 </body>
 </html>
