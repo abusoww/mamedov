@@ -108,14 +108,12 @@ nav a.active::after {
     margin-bottom: 1.5rem;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    white-space: nowrap;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
     color: transparent;
     background: linear-gradient(45deg, var(--text-light) 40%, var(--gold) 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    width: 100%;
+    text-align: center;
 }
 
 .hero h1::after {
@@ -123,12 +121,23 @@ nav a.active::after {
 }
 
 .hero h1 span {
-    position: relative;
     display: inline-block;
-    width: 0%;
     overflow: hidden;
-    animation: typewriter 2s steps(14) 0.5s forwards;
     white-space: nowrap;
+    border-right: 3px solid var(--gold);
+    width: 0;
+    margin: 0 auto;
+    max-width: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.hero h1 span.typing {
+    animation: 
+        typing 2.5s steps(30, end) forwards,
+        blink-caret 0.75s step-end infinite;
+    visibility: visible;
+    max-width: 100%;
 }
 
 .hero h1 span::after {
@@ -161,7 +170,8 @@ nav a.active::after {
 
 /* About Section */
 .about {
-    padding: 8rem 2rem;
+    padding: 4rem 2rem;
+    min-height: auto;
     background: linear-gradient(135deg, #0a0a0f 0%, #141419 100%);
 }
 
@@ -1618,141 +1628,17 @@ section {
 
 /* Update hero section animations */
 .hero h1 {
-    /* Keep existing styles... */
-    animation: slideInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
-.hero p {
-    /* Keep existing styles... */
-    animation: slideInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.2s both;
-}
-
-.quote {
-    /* Keep existing styles... */
-    animation: slideInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.4s both;
-}
-
-/* Smooth section transitions */
-section {
-    /* Keep existing styles... */
-    opacity: 0;
-    animation: fadeIn 1s ease-out forwards;
-}
-
-/* Enhanced nav link animations */
-nav a::after {
-    /* Keep existing styles... */
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Smooth gallery item hover effects */
-.gallery-item {
-    /* Keep existing styles... */
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.gallery-item:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-
-.gallery-item img {
-    /* Keep existing styles... */
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Enhanced mobile menu animations */
-.nav-menu {
-    /* Keep existing styles... */
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.menu-btn span {
-    /* Keep existing styles... */
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Smooth popup animations */
-.popup-overlay {
-    /* Keep existing styles... */
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.popup-content {
-    /* Keep existing styles... */
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Enhanced contact item hover effects */
-.contact-item {
-    /* Keep existing styles... */
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.contact-item:hover {
-    transform: translateY(-5px) scale(1.02);
-    background: rgba(255, 255, 255, 0.12);
-}
-
-/* Smooth social link animations */
-.social-link {
-    /* Keep existing styles... */
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.social-link:hover {
-    transform: translateY(-5px) scale(1.1);
-    color: var(--gold);
-    border-color: var(--gold);
-}
-
-/* Add smooth scroll behavior */
-html {
-    /* Keep existing styles... */
-    scroll-behavior: smooth;
-}
-
-/* Enhanced button animations */
-button {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-button:hover {
-    transform: scale(1.05);
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-/* Add this to your existing animations */
-@keyframes typewriter {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blinkCursor {
-    from, to { border-color: transparent; }
-    50% { border-color: var(--gold); }
-}
-
-/* Update the hero h1 styles */
-.hero h1 {
     position: relative;
     font-size: 5.8rem;
     margin-bottom: 1.5rem;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    white-space: nowrap;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
     color: transparent;
     background: linear-gradient(45deg, var(--text-light) 40%, var(--gold) 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    width: 100%;
+    text-align: center;
 }
 
 .hero h1::after {
@@ -1760,21 +1646,51 @@ button:active {
 }
 
 .hero h1 span {
-    position: relative;
     display: inline-block;
-    width: 0%;
     overflow: hidden;
-    animation: typewriter 2s steps(14) 0.5s forwards;
     white-space: nowrap;
+    border-right: 3px solid var(--gold);
+    width: 0;
+    margin: 0 auto;
+    max-width: 0;
+    opacity: 0;
+    visibility: hidden;
 }
 
-.hero h1 span::after {
-    display: none;
+.hero h1 span.typing {
+    animation: 
+        typing 2.5s steps(30, end) forwards,
+        blink-caret 0.75s step-end infinite;
+    visibility: visible;
+    max-width: 100%;
 }
 
+@keyframes typing {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--gold) }
+}
+
+/* Mobile responsiveness for typing effect */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2.5rem;
+    }
+    
+    .hero h1 span.typing {
+        animation: 
+            typing 2s steps(25, end) forwards,
+            blink-caret 0.75s step-end infinite;
     }
 }
 
