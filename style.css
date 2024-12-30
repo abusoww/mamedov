@@ -7,6 +7,12 @@
     --text-gray: #a0a0a0;
 }
 
+html {
+    overflow-x: hidden;
+    width: 100vw;
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -18,6 +24,11 @@ body {
     background: linear-gradient(135deg, #0a0a0f 0%, #141419 100%);
     color: var(--text-light);
     line-height: 1.6;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
 }
 
 /* Navigation */
@@ -28,6 +39,8 @@ nav {
     width: 100%;
     top: 0;
     z-index: 1000;
+    left: 0;
+    right: 0;
 }
 
 .nav-content {
@@ -66,7 +79,7 @@ nav a::after {
     height: 2px;
     background-color: var(--gold);
     transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 nav a:hover::after,
@@ -90,23 +103,36 @@ nav a.active::after {
 }
 
 .hero h1 {
+    position: relative;
     font-size: 5.8rem;
     margin-bottom: 1.5rem;
-    color: var(--text-light);
-    letter-spacing: 4px;
-    animation: fadeInUp 1s ease-out;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    background: linear-gradient(45deg, var(--text-light) 40%, var(--gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     white-space: nowrap;
-    padding: 0 20px;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+    color: transparent;
+    background: linear-gradient(45deg, var(--text-light) 40%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.hero h1::after {
+    display: none;
+}
+
+.hero h1 span {
+    position: relative;
+    display: inline-block;
+    width: 0%;
+    overflow: hidden;
+    animation: typewriter 2s steps(14) 0.5s forwards;
+    white-space: nowrap;
+}
+
+.hero h1 span::after {
+    display: none;
 }
 
 .hero p {
@@ -114,7 +140,7 @@ nav a.active::after {
     color: var(--gold);
     letter-spacing: 4px;
     margin-bottom: 3rem;
-    animation: fadeInUp 1s ease-out;
+    animation: slideInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.2s both;
 }
 
 .quote {
@@ -123,7 +149,7 @@ nav a.active::after {
     font-style: italic;
     max-width: 600px;
     margin: 0 auto;
-    animation: fadeInUp 1s ease-out;
+    animation: slideInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.4s both;
 }
 
 .quote-author {
@@ -218,12 +244,13 @@ nav a.active::after {
     background: rgba(255, 255, 255, 0.05);
     padding: 1.5rem;
     border-radius: 10px;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-item:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px) scale(1.02);
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .contact-item i {
@@ -257,15 +284,15 @@ footer {
     color: var(--text-gray);
     font-size: 1.5rem;
     margin: 0 1rem;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0.5rem;
     border: 1px solid transparent;
 }
 
 .social-link:hover {
+    transform: translateY(-5px) scale(1.1);
     color: var(--gold);
     border-color: var(--gold);
-    transform: translateY(-3px);
 }
 
 .copyright {
@@ -505,7 +532,7 @@ footer {
     width: 100%;
     background: var(--gold);
     border-radius: 2px;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .menu-btn span:nth-child(1) {
@@ -542,7 +569,7 @@ footer {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 100%;
+        width: 100vw;
         height: 100vh;
         background: rgba(10, 10, 15, 0.98);
         display: flex;
@@ -550,12 +577,15 @@ footer {
         justify-content: center;
         align-items: center;
         gap: 2rem;
-        transition: 0.3s ease;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1000;
+        margin: 0;
+        padding: 0;
     }
 
     .nav-menu.open {
         right: 0;
+        left: 0;
     }
 
     .nav-menu a {
@@ -730,7 +760,7 @@ footer {
     box-shadow: 0 0 30px rgba(196, 164, 124, 0.3);
     transform: scale(0.9);
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .popup-overlay.active .popup-content {
@@ -827,12 +857,13 @@ footer {
     .gallery-item {
         border-radius: 20px;
         box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .gallery-item:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
 
     .overlay {
@@ -875,7 +906,7 @@ footer {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.3s ease;
+        transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .gallery-item:hover img {
@@ -1357,19 +1388,17 @@ footer {
     }
 }
 
-@keyframes fadeInUp {
+@keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
 .hero h1, .hero p, .quote {
-    animation: fadeInUp 1s ease-out;
+    animation: slideInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 /* Gallery Section */
@@ -1411,19 +1440,20 @@ footer {
     overflow: hidden;
     border-radius: 20px;
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .gallery-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
 .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .gallery-item:hover img {
@@ -1546,4 +1576,307 @@ footer {
 
 .watermark a:hover::after {
     transform: scaleX(1);
+}
+
+/* Add this to prevent any horizontal overflow */
+section {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Add these animation utilities at the top of your style.css file */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Update hero section animations */
+.hero h1 {
+    /* Keep existing styles... */
+    animation: slideInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.hero p {
+    /* Keep existing styles... */
+    animation: slideInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.2s both;
+}
+
+.quote {
+    /* Keep existing styles... */
+    animation: slideInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.4s both;
+}
+
+/* Smooth section transitions */
+section {
+    /* Keep existing styles... */
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Enhanced nav link animations */
+nav a::after {
+    /* Keep existing styles... */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth gallery item hover effects */
+.gallery-item {
+    /* Keep existing styles... */
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.gallery-item img {
+    /* Keep existing styles... */
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced mobile menu animations */
+.nav-menu {
+    /* Keep existing styles... */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-btn span {
+    /* Keep existing styles... */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth popup animations */
+.popup-overlay {
+    /* Keep existing styles... */
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.popup-content {
+    /* Keep existing styles... */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced contact item hover effects */
+.contact-item {
+    /* Keep existing styles... */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Smooth social link animations */
+.social-link {
+    /* Keep existing styles... */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-link:hover {
+    transform: translateY(-5px) scale(1.1);
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+/* Add smooth scroll behavior */
+html {
+    /* Keep existing styles... */
+    scroll-behavior: smooth;
+}
+
+/* Enhanced button animations */
+button {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Add this to your existing animations */
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blinkCursor {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--gold); }
+}
+
+/* Update the hero h1 styles */
+.hero h1 {
+    position: relative;
+    font-size: 5.8rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    white-space: nowrap;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    color: transparent;
+    background: linear-gradient(45deg, var(--text-light) 40%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.hero h1::after {
+    display: none;
+}
+
+.hero h1 span {
+    position: relative;
+    display: inline-block;
+    width: 0%;
+    overflow: hidden;
+    animation: typewriter 2s steps(14) 0.5s forwards;
+    white-space: nowrap;
+}
+
+.hero h1 span::after {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Add these styles to your existing animations section */
+.fade-out {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Update section styles */
+section {
+    opacity: 1; /* Default state */
+    transform: none; /* Default state */
+}
+
+/* Ensure hero section is always visible */
+.hero {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Remove any existing animations that might conflict */
+section {
+    animation: none;
+}
+
+/* Add smooth transitions to all sections */
+section:not(.hero) {
+    will-change: opacity, transform;
+}
+
+/* Reveal Animation Classes */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Different animation directions */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 0.8s ease;
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.8s ease;
+}
+
+.reveal-left.active,
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Delay classes for staggered animations */
+.delay-1 {
+    transition-delay: 0.2s;
+}
+
+.delay-2 {
+    transition-delay: 0.4s;
+}
+
+.delay-3 {
+    transition-delay: 0.6s;
+}
+
+.section-hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s;
+}
+
+.section-show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Optional: Add different animations for different sections */
+#about.section-hidden {
+    transform: translateY(70px);
+}
+
+#gallery.section-hidden {
+    transform: translateX(-50px);
+}
+
+#contact.section-hidden {
+    transform: scale(0.9);
 }
