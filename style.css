@@ -109,9 +109,6 @@ nav a.active::after {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     color: var(--text-light);
-    background: linear-gradient(45deg, var(--text-light) 40%, var(--gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     width: 100%;
     text-align: center;
 }
@@ -130,6 +127,11 @@ nav a.active::after {
     max-width: 0;
     opacity: 0;
     visibility: hidden;
+    background-image: linear-gradient(45deg, var(--text-light) 40%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--text-light);
 }
 
 .hero h1 span.typing {
@@ -1634,9 +1636,6 @@ section {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     color: var(--text-light);
-    background: linear-gradient(45deg, var(--text-light) 40%, var(--gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     width: 100%;
     text-align: center;
 }
@@ -1655,6 +1654,11 @@ section {
     max-width: 0;
     opacity: 0;
     visibility: hidden;
+    background-image: linear-gradient(45deg, var(--text-light) 40%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--text-light);
 }
 
 .hero h1 span.typing {
