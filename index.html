@@ -12,9 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="preloader">
-        <div class="preloader-spinner"></div>
-    </div>
     <!-- Navigation -->
     <nav>
         <div class="nav-content">
@@ -36,7 +33,7 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <img src="https://i.ibb.co/8x3d2gx/IMG-8428.jpg" alt="Profile Image" class="profile-image">
-            <h1>Нурлан Мамедов</h1>
+            <h1><span>Нурлан Мамедов</span></h1>
             <p>ГЕНИЙ. МИЛЛИАРДЕР. ПЛЕЙБОЙ. ФИЛАНТРОП.</p>
             <div class="quote">
                 "Жизнь - это не поиск себя. Жизнь - это создание себя."
@@ -143,199 +140,251 @@
     </div>
 
     <script>
-        window.addEventListener('load', () => {
-            const preloader = document.querySelector('.preloader');
-            preloader.classList.add('fade-out');
-        });
-
-        // Mobile menu functionality
-        const menuBtn = document.querySelector('.menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-        const navLinks = document.querySelectorAll('.nav-menu a');
-
-        menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('open');
-            navMenu.classList.toggle('open');
-        });
-
-        // Close menu when clicking a link
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menuBtn.classList.remove('open');
-                navMenu.classList.remove('open');
-            });
-        });
-
-        // Active menu handler
-        const sections = document.querySelectorAll('section');
-        
-        function setActiveMenu() {
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= (sectionTop - sectionHeight/3)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').substring(1) === current) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', setActiveMenu);
-        window.addEventListener('load', setActiveMenu);
-
-        // Slider functionality
-        const slider = {
-            slides: document.querySelectorAll('.slide'),
-            dots: document.querySelectorAll('.dot'),
-            prevBtn: document.querySelector('.prev-btn'),
-            nextBtn: document.querySelector('.next-btn'),
-            sliderContainer: document.querySelector('.interests-slider'),
-            currentSlide: 0,
-            touchStartX: 0,
-            touchEndX: 0,
-            mouseStartX: 0,
-            mouseEndX: 0,
-            isDragging: false,
-
-            init() {
-                this.prevBtn.addEventListener('click', () => this.changeSlide('prev'));
-                this.nextBtn.addEventListener('click', () => this.changeSlide('next'));
-                
-                this.dots.forEach((dot, index) => {
-                    dot.addEventListener('click', () => this.goToSlide(index));
-                });
-
-                // Touch Events (Mobile)
-                this.sliderContainer.addEventListener('touchstart', (e) => {
-                    this.touchStartX = e.touches[0].clientX;
-                }, { passive: true });
-
-                this.sliderContainer.addEventListener('touchmove', (e) => {
-                    this.touchEndX = e.touches[0].clientX;
-                    e.preventDefault(); // Prevent scrolling while swiping
-                }, { passive: false });
-
-                this.sliderContainer.addEventListener('touchend', () => {
-                    this.handleSwipe(this.touchStartX, this.touchEndX);
-                });
-
-                // Mouse Events (Desktop)
-                this.sliderContainer.addEventListener('mousedown', (e) => {
-                    this.isDragging = true;
-                    this.mouseStartX = e.clientX;
-                    this.sliderContainer.style.cursor = 'grabbing';
-                });
-
-                document.addEventListener('mousemove', (e) => {
-                    if (this.isDragging) {
-                        this.mouseEndX = e.clientX;
-                    }
-                });
-
-                document.addEventListener('mouseup', () => {
-                    if (this.isDragging) {
-                        this.handleSwipe(this.mouseStartX, this.mouseEndX);
-                        this.isDragging = false;
-                        this.sliderContainer.style.cursor = 'grab';
-                    }
-                });
-            },
-
-            handleSwipe(startX, endX) {
-                const swipeDistance = startX - endX;
-                const minSwipeDistance = 30; // Reduced threshold for more responsive swipes
-
-                if (Math.abs(swipeDistance) > minSwipeDistance) {
-                    if (swipeDistance > 0) {
-                        this.changeSlide('next');
-                    } else {
-                        this.changeSlide('prev');
-                    }
-                }
-            },
-
-            changeSlide(direction) {
-                this.slides[this.currentSlide].classList.remove('active');
-                this.dots[this.currentSlide].classList.remove('active');
-
-                if (direction === 'next') {
-                    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-                } else {
-                    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
-                }
-
-                this.slides[this.currentSlide].classList.add('active');
-                this.dots[this.currentSlide].classList.add('active');
-            },
-
-            goToSlide(index) {
-                this.slides[this.currentSlide].classList.remove('active');
-                this.dots[this.currentSlide].classList.remove('active');
-                
-                this.currentSlide = index;
-                
-                this.slides[this.currentSlide].classList.add('active');
-                this.dots[this.currentSlide].classList.add('active');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Force scroll to top on page refresh
+            if (history.scrollRestoration) {
+                history.scrollRestoration = 'manual';
             }
-        };
+            window.scrollTo(0, 0);
 
-        slider.init();
+            // Mobile menu functionality
+            const menuBtn = document.querySelector('.menu-btn');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-menu a');
 
-        // Popup functionality
-        const popup = document.querySelector('.popup-overlay');
-        const popupContent = popup.querySelector('.popup-content');
-        const popupClose = popup.querySelector('.popup-close');
-        const popupImg = popup.querySelector('img');
-        const popupTitle = popup.querySelector('h3');
-        const popupDesc = popup.querySelector('p');
-        const galleryItems = document.querySelectorAll('.gallery-item');
+            menuBtn.addEventListener('click', () => {
+                menuBtn.classList.toggle('open');
+                navMenu.classList.toggle('open');
+            });
 
-        function openPopup(item) {
-            const img = item.querySelector('img');
-            const title = item.querySelector('.overlay span').textContent;
-            const desc = item.querySelector('.overlay p').textContent;
+            // Close menu when clicking a link
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default anchor behavior
+                    menuBtn.classList.remove('open');
+                    navMenu.classList.remove('open');
+                    
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
 
-            popupImg.src = img.src;
-            popupImg.alt = img.alt;
-            popupTitle.textContent = title;
-            popupDesc.textContent = desc;
+            // Active menu handler
+            const sections = document.querySelectorAll('section');
+            
+            function setActiveMenu() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= (sectionTop - sectionHeight/3)) {
+                        current = section.getAttribute('id');
+                    }
+                });
 
-            popup.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-        }
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
 
-        function closePopup() {
-            popup.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
-        }
+            window.addEventListener('scroll', setActiveMenu);
+            window.addEventListener('load', setActiveMenu);
 
-        // Add click events to gallery items
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => openPopup(item));
-        });
+            // Slider functionality
+            const slider = {
+                slides: document.querySelectorAll('.slide'),
+                dots: document.querySelectorAll('.dot'),
+                prevBtn: document.querySelector('.prev-btn'),
+                nextBtn: document.querySelector('.next-btn'),
+                sliderContainer: document.querySelector('.interests-slider'),
+                currentSlide: 0,
+                touchStartX: 0,
+                touchEndX: 0,
+                mouseStartX: 0,
+                mouseEndX: 0,
+                isDragging: false,
 
-        // Close popup when clicking close button or outside
-        popupClose.addEventListener('click', closePopup);
-        popup.addEventListener('click', (e) => {
-            if (e.target === popup) closePopup();
-        });
+                init() {
+                    this.prevBtn.addEventListener('click', () => this.changeSlide('prev'));
+                    this.nextBtn.addEventListener('click', () => this.changeSlide('next'));
+                    
+                    this.dots.forEach((dot, index) => {
+                        dot.addEventListener('click', () => this.goToSlide(index));
+                    });
 
-        // Close popup with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closePopup();
-        });
+                    // Touch Events (Mobile)
+                    this.sliderContainer.addEventListener('touchstart', (e) => {
+                        this.touchStartX = e.touches[0].clientX;
+                    }, { passive: true });
 
-        // Prevent popup content clicks from closing the popup
-        popupContent.addEventListener('click', (e) => {
-            e.stopPropagation();
+                    this.sliderContainer.addEventListener('touchmove', (e) => {
+                        this.touchEndX = e.touches[0].clientX;
+                        e.preventDefault(); // Prevent scrolling while swiping
+                    }, { passive: false });
+
+                    this.sliderContainer.addEventListener('touchend', () => {
+                        this.handleSwipe(this.touchStartX, this.touchEndX);
+                    });
+
+                    // Mouse Events (Desktop)
+                    this.sliderContainer.addEventListener('mousedown', (e) => {
+                        this.isDragging = true;
+                        this.mouseStartX = e.clientX;
+                        this.sliderContainer.style.cursor = 'grabbing';
+                    });
+
+                    document.addEventListener('mousemove', (e) => {
+                        if (this.isDragging) {
+                            this.mouseEndX = e.clientX;
+                        }
+                    });
+
+                    document.addEventListener('mouseup', () => {
+                        if (this.isDragging) {
+                            this.handleSwipe(this.mouseStartX, this.mouseEndX);
+                            this.isDragging = false;
+                            this.sliderContainer.style.cursor = 'grab';
+                        }
+                    });
+                },
+
+                handleSwipe(startX, endX) {
+                    const swipeDistance = startX - endX;
+                    const minSwipeDistance = 30; // Reduced threshold for more responsive swipes
+
+                    if (Math.abs(swipeDistance) > minSwipeDistance) {
+                        if (swipeDistance > 0) {
+                            this.changeSlide('next');
+                        } else {
+                            this.changeSlide('prev');
+                        }
+                    }
+                },
+
+                changeSlide(direction) {
+                    this.slides[this.currentSlide].classList.remove('active');
+                    this.dots[this.currentSlide].classList.remove('active');
+
+                    if (direction === 'next') {
+                        this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+                    } else {
+                        this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+                    }
+
+                    this.slides[this.currentSlide].classList.add('active');
+                    this.dots[this.currentSlide].classList.add('active');
+                },
+
+                goToSlide(index) {
+                    this.slides[this.currentSlide].classList.remove('active');
+                    this.dots[this.currentSlide].classList.remove('active');
+                    
+                    this.currentSlide = index;
+                    
+                    this.slides[this.currentSlide].classList.add('active');
+                    this.dots[this.currentSlide].classList.add('active');
+                }
+            };
+
+            slider.init();
+
+            // Popup functionality
+            const popup = document.querySelector('.popup-overlay');
+            const popupContent = popup.querySelector('.popup-content');
+            const popupClose = popup.querySelector('.popup-close');
+            const popupImg = popup.querySelector('img');
+            const popupTitle = popup.querySelector('h3');
+            const popupDesc = popup.querySelector('p');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            function openPopup(item) {
+                const img = item.querySelector('img');
+                const title = item.querySelector('.overlay span').textContent;
+                const desc = item.querySelector('.overlay p').textContent;
+
+                popupImg.src = img.src;
+                popupImg.alt = img.alt;
+                popupTitle.textContent = title;
+                popupDesc.textContent = desc;
+
+                popup.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+
+            function closePopup() {
+                popup.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            // Add click events to gallery items
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => openPopup(item));
+            });
+
+            // Close popup when clicking close button or outside
+            popupClose.addEventListener('click', closePopup);
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) closePopup();
+            });
+
+            // Close popup with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closePopup();
+            });
+
+            // Prevent popup content clicks from closing the popup
+            popupContent.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                root: null,
+                threshold: 0.1,
+                rootMargin: '-50px'
+            };
+
+            const animatedSections = document.querySelectorAll('section:not(.hero)');
+            
+            function handleIntersection(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const section = entry.target;
+                        section.style.opacity = '0';
+                        section.style.transform = 'translateY(50px)';
+                        
+                        // Force reflow
+                        section.offsetHeight;
+                        
+                        // Add animation
+                        section.style.transition = 'all 0.8s ease-out';
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
+                        
+                        observer.unobserve(section);
+                    }
+                });
+            }
+
+            const sectionObserver = new IntersectionObserver(handleIntersection, observerOptions);
+
+            // Initialize sections
+            animatedSections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(50px)';
+                sectionObserver.observe(section);
+            });
         });
     </script>
 </body>
