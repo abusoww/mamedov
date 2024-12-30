@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader"></div>
+    
     <!-- Navigation -->
     <nav>
         <div class="nav-content">
@@ -141,6 +144,32 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Calculate scrollbar width
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+            
+            // Add loading class to html
+            document.documentElement.classList.add('loading');
+            
+            // Preloader
+            const preloader = document.querySelector('.preloader');
+            const heroTitle = document.querySelector('.hero h1 span');
+            
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    // Remove loading class after animation
+                    setTimeout(() => {
+                        document.documentElement.classList.remove('loading');
+                        preloader.remove();
+                        // Start typing animation after preloader is gone
+                        setTimeout(() => {
+                            heroTitle.classList.add('typing');
+                        }, 100); // Slightly reduced delay
+                    }, 400); // Slightly reduced delay
+                }, 800);
+            });
+
             // Force scroll to top on page refresh
             if (history.scrollRestoration) {
                 history.scrollRestoration = 'manual';
