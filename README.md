@@ -35,3 +35,7 @@ cd mamedov.vip
 ```
 
 3. Open ```index.html``` in your browser to view the site.
+
+
+## Contact
+For feedback, contact me at: [nicat@abusov.com]
